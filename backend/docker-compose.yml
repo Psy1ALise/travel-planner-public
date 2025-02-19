@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: ghcr.io/baosystems/postgis:latest
+    container_name: trip-planner-db
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME:-travelplanner}
+      POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-changeme}
+      TZ: UTC
+    ports:
+      - "5720:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

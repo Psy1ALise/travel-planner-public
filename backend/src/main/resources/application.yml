@@ -1,0 +1,26 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  jackson:
+    default-property-inclusion: non_null
+  datasource:
+    url: jdbc:postgresql:///${DATABASE_NAME:your_database_name}?cloudSqlInstance=${CLOUD_SQL_CONNECTION_NAME:your_cloud_sql_instance}&socketFactory=com.google.cloud.sql.postgres.SocketFactory&user=${DATABASE_USERNAME:your_username}&password=${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect
+    show-sql: true
+  sql:
+    init:
+      mode: always
+      schema-locations: "classpath:schema.sql"
+
+travelplanner:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY:your_jwt_secret_key}
+  gcs:
+    bucket: ${GCS_BUCKET:your_gcs_bucket}
